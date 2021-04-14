@@ -12,11 +12,12 @@ spring:
   profiles:
     include: null
   datasource:
-    url: "jdbc:postgresql://127.0.0.1:5432/meli?currentSchema=meli_test"
-    password: "password"
+    url: "jdbc:postgresql://aireambiente-dev-id.c30ai1fbjrzh.us-east-1.rds.amazonaws.com/meli_test?currentSchema=meli_test"
+    password: "Admin*2021"
     username: "postgres"
   jpa:
     databasePlatform: "org.hibernate.dialect.PostgreSQLDialect"
     hibernate:
       ddl-auto: update
+
 
