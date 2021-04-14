@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "mutantes"
+  devtools:
+    add-properties: false
+  h2:
+    console:
+      enabled: true
+      path: "/h2"
+  profiles:
+    include: null
+  datasource:
+    url: "jdbc:postgresql://127.0.0.1:5432/meli?currentSchema=meli_test"
+    password: "password"
+    username: "postgres"
+  jpa:
+    databasePlatform: "org.hibernate.dialect.PostgreSQLDialect"
+    hibernate:
+      ddl-auto: update
+
