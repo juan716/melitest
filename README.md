@@ -24,6 +24,9 @@ Los entry points representan los puntos de entrada de la aplicación o el inicio
 
 ## BASE DE DATOS
 
+La base de datos es motor postgress y esta alojada en un recurso RDS en AWS.
+
+En caso de correr local y querer instalar una base de datos.
 Se debe de crear una base de datos en este caso el aplicativo tiene un adaptador para postgress
 
 CREATE DATABASE databasename
@@ -47,9 +50,22 @@ Crear la imagen basado en el dockerfile ubicado en la carpeta deployment
 Crear contenedor
 Este correra la aplicacion por el puerto 8080
 
-## DESPLIEGUE DE CONTENEDOR EN NUBE HEROKU
+## DESPLIEGUE DE APLICACION EN NUBE HEROKU
+
+
+Una ayuda para resolver el performance a la necesidad de 1000 a 1millon de peteciones
+se podria desplegar el aplicativo en un eks de aws, con sus respectivas configuraciones de deployment,
+crecimiento horizontal con asignacion de recursos, y con un ELB que nos ayude al tema de balanceo de cargas, tambien
+evaluar integracion a una arquitectura orientada a mensajeria(colas).
+
+Se aloja en nube gratiuta heroku ya que no tiene costo, como los anteriores.
+
+Se despliega back en nube gratiuta heroku como dyno.
+https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku
 
 ## DOCUMENTACION Y PRUEBA ENDPOINT
+
+https://testmelijq.herokuapp.com/swagger-ui.html
 
 El aplicativo tiene implementado swagger como libreria de documentacion de servicios expuestos.
 Luego de ejecutar la aplicacion dirijirse a la ruta /swagger-ui.html;
