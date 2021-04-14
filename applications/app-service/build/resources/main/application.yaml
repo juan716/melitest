@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "mutantes"
+  devtools:
+    add-properties: false
+  h2:
+    console:
+      enabled: true
+      path: "/h2"
+  profiles:
+    include: null
+  datasource:
+    url: "jdbc:postgresql://aireambiente-dev-id.c30ai1fbjrzh.us-east-1.rds.amazonaws.com/meli_test?currentSchema=meli_test"
+    password: "Admin*2021"
+    username: "postgres"
+  jpa:
+    databasePlatform: "org.hibernate.dialect.PostgreSQLDialect"
+    hibernate:
+      ddl-auto: update
+
+

@@ -1,0 +1,44 @@
+subprojects {
+    apply plugin: "java"
+    apply plugin: 'jacoco'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+
+    dependencies {
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        compile group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.4.3'
+        compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+        compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.7'
+        compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    jacoco {
+        toolVersion = '0.8.2'
+    }
+
+    jacocoTestReport {
+        sourceSets sourceSets.main
+        executionData.from = fileTree(buildDir).include("/jacoco/*.exec")
+    }
+
+}

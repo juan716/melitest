@@ -1,0 +1,10 @@
+dependencies {
+    compile project(':domain-model')
+
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
+    runtime 'com.h2database:h2'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
+
+}

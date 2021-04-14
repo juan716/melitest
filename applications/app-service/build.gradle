@@ -1,0 +1,15 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: '2.4.2'
+    compile project(":entry-points-api-rest")
+    compile project(":driven-adapters-jpa-repository")
+    compile project(':domain-usecase')
+    compile project(':domain-model')
+    compile 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    runtime('org.springframework.boot:spring-boot-devtools')
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+}
+
