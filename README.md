@@ -38,8 +38,8 @@ El aplicativo tiene en sus properties el parametro ddl-auto= update con esto se 
 
 Se debe de modificar los parametros de conexion a la base de datos en el archivo properties del proyecto app-service.
 Luego hacer build del proyecto app-service.
-Abrir la terminal y ubicarse en el directorio base del repositorio /applications/app-service/build/libs alli se encontrara el jar llamado app-service.jar ejecutar el comando java - jar
-ej: java -jar app-service,jar
+Abrir la terminal y ubicarse en el directorio base del repositorio /applications/app-service/build/libs alli se encontrara el jar llamado aplications-app-service.jar ejecutar el comando java - jar
+ej: java -jar aplications-app-service,jar
 Esto ejecutara la aplicacion localhost en el puerto 8080;
 
 ## CREAR CONTENEDOR EN DOCKER
@@ -81,3 +81,4 @@ Para la cobertura de pruebas unitarias se uso jacoco
 Se debe de ejecutar el comando gradle test jacocoTestReport
 Este deja el reporte en la ruta /domain/usecase/build/reports/jacoco/test/html/index.html
 
+https://raw.githubusercontent.com/juan716/melitest/develop/cober.png
