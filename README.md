@@ -65,6 +65,8 @@ https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku
 
 ## DOCUMENTACION Y PRUEBA ENDPOINT
 
+Tener en cuenta que la primera peticion toma un tiempo mientras el servidor despliega.
+
 https://testmelijq.herokuapp.com/swagger-ui.html
 
 El aplicativo tiene implementado swagger como libreria de documentacion de servicios expuestos.
