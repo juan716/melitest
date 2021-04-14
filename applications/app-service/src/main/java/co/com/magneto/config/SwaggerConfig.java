@@ -28,7 +28,7 @@ public class SwaggerConfig {
     }
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder().title("API Magneto").version("1.0.0")
-                .description("Servicio que expone los metodos del prozecto mutantes")
+                .description("Servicio que expone los metodos del proyecto mutantes")
                 .build();
     }
 }

@@ -2,10 +2,10 @@ apply plugin: 'org.springframework.boot'
 
 dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: '2.4.2'
-	implementation project(':api-rest')
-	implementation project(':jpa-repository')
-    implementation project(':model')
-    implementation project(':usecase')
+    compile project(":entry-points-api-rest")
+    compile project(":driven-adapters-jpa-repository")
+    compile project(':domain-usecase')
+    compile project(':domain-model')
     compile 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtime('org.springframework.boot:spring-boot-devtools')
@@ -13,11 +13,3 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 }
 
-task explodedJar(type: Copy) {
-    with jar
-    into "${buildDir}/exploded"
-}
-
-configurations{
-	compile.exclude group: "org.springframework.boot", module:"spring-boot-starter-tomcat"
-}

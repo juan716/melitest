@@ -1,6 +1,6 @@
 dependencies {
-    implementation project(':usecase')
-    implementation project(':model')
+    compile project(':domain-usecase')
+    compile project(':domain-model')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'javax.validation:validation-api:2.0.1.Final'

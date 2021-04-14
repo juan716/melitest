@@ -1,33 +1,64 @@
 buildscript {
-	ext {
-		cleanArchitectureVersion = '1.9.0'
-		springBootVersion = '2.1.1.RELEASE'
-		sonarVersion = '3.0'
-		jacocoVersion = '0.8.5'
-        lombokVersion = '1.18.16'
-	}
-}
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+        springCloudVersion = 'Greenwich.M1'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
 
-plugins {
-	id 'co.com.bancolombia.cleanArchitecture' version "${cleanArchitectureVersion}"
-	id 'org.springframework.boot' version "${springBootVersion}"
-	id 'org.sonarqube' version "${sonarVersion}"
-	id 'jacoco'
-}
-
-sonarqube {
-    def modules = subprojects.projectDir.collect { "${it.toString().replace(project.projectDir.toString() + "/", "")}" }
-    properties {
-        property "sonar.sourceEnconding", "UTF-8"
-        property "sonar.modules", "${modules.join(',')}"
-        property "sonar.sources", "src,deployment,settings.gradle,main.gradle,build.gradle,${modules.collect { "${it}/build.gradle" }.join(',')}"
-        property "sonar.test", "src/test"
-        property "sonar.java.binaries", ""
-        property "sonar.junit.reportsPath", ""
-        property "sonar.java.coveragePlugin", "jacoco"
-        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('org.springframework.boot:spring-boot-starter-security:2.1.8.RELEASE')
+        classpath('org.jacoco:org.jacoco.agent:0.8.2')
     }
 }
 
+plugins {
+    id 'java-gradle-plugin'
+}
 
 apply from: './main.gradle'
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+    repositories {
+        mavenCentral()
+    }
+    jacoco {
+        toolVersion = '0.8.5'
+    }
+}
+
+subprojects {
+    jacocoTestReport {
+        reports {
+            html.enabled = true
+            xml.enabled = true
+        }
+    }
+}
+
+task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport){
+    dependsOn = subprojects.test
+    additionalSourceDirs.from = files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories.from = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories.from = files(subprojects.sourceSets.main.output)
+    executionData.from = files(subprojects.jacocoTestReport.executionData)
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+    onlyIf = {
+        true
+    }
+    doFirst {
+        executionData.from = files(executionData.findAll {
+            it.exists()
+        })
+    }
+}

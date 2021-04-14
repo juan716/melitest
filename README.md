@@ -77,3 +77,7 @@ Se abordo el algoritmo manejando las posiciones por cada letra, luego de obtener
 ## COBERTURA DE PRUEBAS UNITARIAS
 
 Para la cobertura de pruebas unitarias se uso jacoco
+
+Se debe de ejecutar el comando gradle test jacocoTestReport
+Este deja el reporte en la ruta /domain/usecase/build/reports/jacoco/test/html/index.html
+
