@@ -1,4 +1,4 @@
 dependencies {
     compile project(':domain-model')
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
+    compile project(":driven-adapters-jpa-repository")
 }

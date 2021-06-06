@@ -4,20 +4,17 @@ import co.com.magneto.model.adnsecuencia.AdnSecuencia;
 import co.com.magneto.model.adnsecuencia.gateways.AdnSecuenciaRepository;
 import co.com.magneto.model.common.ResponseData;
 import co.com.magneto.model.common.Stats;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 @RequiredArgsConstructor
 public class AdnSecuenciaUseCase {
 
     private final AdnSecuenciaRepository ticketRepository;
-    private final ObjectMapper mapper;
     private ResponseData responseData = new ResponseData();
 
     @Async("asyncExecutor")

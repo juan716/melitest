@@ -21,6 +21,9 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import static co.com.magneto.model.common.Constants.ERRORBASENITRO;
+import static co.com.magneto.model.common.Constants.ERRORSIZEBASENITRO;
+
 @RestController
 @RequestMapping(value = "/mutant", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -37,19 +40,19 @@ public class mutantController {
             @ApiResponse(code = 403, message="Información no fue procesada")})
     @PostMapping()
     public ResponseEntity mutant(@RequestBody RequestAdn adn) {
-
         boolean isMutant;
-
-        responseData = this.useCaseValidation.Valido(adn);
-        if (responseData.getCode()!="200"){
+        if (this.useCaseValidation.BaseNitrogenada(adn)){
+            responseData.setDetail(ERRORBASENITRO);
+            return new ResponseEntity<String>(responseData.getDetail(), HttpStatus.BAD_REQUEST);
+        }
+        if (this.useCaseValidation.SizeBaseNitrogenada(adn)){
+            responseData.setDetail(ERRORSIZEBASENITRO);
             return new ResponseEntity<String>(responseData.getDetail(), HttpStatus.BAD_REQUEST);
         }
         isMutant=this.useCaseMutant.isMutant(adn);
-
         AdnSecuencia objAdn =  AdnSecuencia.builder().dna(adn.getDna().toString()).build();
         //se consume metodo async
         this.useCaseAdnSecuencia.sendAdnSecuencia(objAdn);
-
         if (isMutant){
            return new ResponseEntity<String>("", HttpStatus.OK);
         }

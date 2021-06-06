@@ -8,10 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity(name = "AdnSecuencia")
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@Builder(toBuilder = true)
+@Data
 public class AdnSecuenciaData {
 
 
