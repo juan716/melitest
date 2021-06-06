@@ -9,7 +9,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtime('org.springframework.boot:spring-boot-devtools')
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
+    compile 'org.reactivecommons.utils:object-mapper:0.1.0'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 }
 

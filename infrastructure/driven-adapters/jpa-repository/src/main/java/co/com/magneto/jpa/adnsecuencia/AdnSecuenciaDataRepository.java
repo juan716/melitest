@@ -1,10 +1,11 @@
 package co.com.magneto.jpa.adnsecuencia;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 
-public interface AdnSecuenciaDataRepository extends JpaRepository<AdnSecuenciaData, Long>{
+
+public interface AdnSecuenciaDataRepository extends CrudRepository<AdnSecuenciaData, Long>, QueryByExampleExecutor<AdnSecuenciaData> {
 
 }
 

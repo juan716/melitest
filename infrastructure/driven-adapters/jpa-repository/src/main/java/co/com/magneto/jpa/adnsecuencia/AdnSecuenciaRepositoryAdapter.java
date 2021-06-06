@@ -1,38 +1,45 @@
 package co.com.magneto.jpa.adnsecuencia;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import co.com.magneto.model.adnsecuencia.AdnSecuencia;
 import co.com.magneto.model.adnsecuencia.gateways.AdnSecuenciaRepository;
-import com.google.gson.Gson;
+import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import co.com.magneto.jpa.helper.AdapterOperations;
 
-import java.io.IOException;
+
 import java.util.List;
-import java.util.Map;
+
 
 @Repository
-public class AdnSecuenciaRepositoryAdapter implements AdnSecuenciaRepository {
-
+public class AdnSecuenciaRepositoryAdapter
+        extends AdapterOperations<AdnSecuencia, AdnSecuenciaData, Long, AdnSecuenciaDataRepository>
+        implements AdnSecuenciaRepository
+{
     @Autowired
-    private  AdnSecuenciaDataRepository repository;
-    @Autowired
-    private ObjectMapper mapper;
+    public AdnSecuenciaRepositoryAdapter(AdnSecuenciaDataRepository repository, ObjectMapper mapper) {
+        /**
+         * Could be use mapper.mapBuilder if your domain model implement builder pattern
+         * super(repository, mapper, d ->
+         * mapper.mapBuilder(d,ObjectModel.ObjectModelBuilder.class).build()); Or using
+         * mapper.map with the class of the object model
+         */
+        super(repository, mapper, d -> mapper.map(d, AdnSecuencia.class));
+        }
 
     @Override
     public AdnSecuencia save(AdnSecuencia adn) {
-        AdnSecuenciaData data = mapper.convertValue(adn, AdnSecuenciaData.class);
-        repository.save(data);
-        return adn;
+
+        AdnSecuenciaData sessionData = repository.save(toData(adn));
+
+        return super.toEntity(sessionData);
     }
 
     @Override
-    public List<AdnSecuencia> getStats() throws IOException {
-        List<AdnSecuenciaData> diffObjectsData  =  mapper.convertValue(repository.findAll(), List.class);
-        String json = new Gson().toJson(diffObjectsData);
-        List<AdnSecuencia> myObjects = mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, AdnSecuencia.class));
-        return  myObjects;
+    public List<AdnSecuencia> getStats() {
+        List<AdnSecuenciaData> secuencia = (List<AdnSecuenciaData>) repository.findAll();
+        return super.toList(secuencia);
+
     }
 
 
